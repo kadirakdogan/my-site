@@ -16,8 +16,8 @@ export function ScrollReveal({
   children,
   className,
   delay = 0,
-  y = 24,
-  duration = 0.6,
+  y = 16,
+  duration = 0.35,
   once = true,
 }: ScrollRevealProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -31,7 +31,7 @@ export function ScrollReveal({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-80px" }}
+      viewport={{ once, margin: "-40px" }}
       transition={{
         duration,
         delay,

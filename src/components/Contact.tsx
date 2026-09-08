@@ -1,118 +1,112 @@
 "use client";
 
-import { personalInfo } from "@/data/content";
+import { useLanguage } from "@/context/LanguageContext";
 import { ScrollReveal } from "./ScrollReveal";
-import { motion, useReducedMotion } from "framer-motion";
 
 export function Contact() {
-  const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
 
   return (
     <section
       id="contact"
-      className="relative py-24 sm:py-32"
       aria-labelledby="contact-heading"
+      className="py-20 sm:py-32"
     >
-      {/* Subtle top border */}
-      <div className="absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent sm:inset-x-8 lg:inset-x-12" />
-
-      {/* Ambient glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.04] blur-[100px]" />
-
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent-light">
-            05 / Contact
-          </p>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.1}>
-          <h2
-            id="contact-heading"
-            className="font-display text-4xl font-bold tracking-tight text-content-primary sm:text-5xl lg:text-6xl"
-          >
-            Let&apos;s work
-            <br />
-            <span className="text-gradient">together.</span>
-          </h2>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.25}>
-          <p className="mt-6 max-w-lg text-lg text-content-secondary">
-            Have a project in mind or need reliable IT support? I&apos;m always
-            open to discussing new opportunities.
-          </p>
-        </ScrollReveal>
-
-        {/* Contact links */}
-        <ScrollReveal delay={0.35}>
-          <div className="mt-12 space-y-6">
-            {/* Email — large, prominent */}
-            <div>
-              <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-content-tertiary">
-                Email
-              </p>
-              <motion.a
-                href={`mailto:${personalInfo.email}`}
-                className="group relative inline-block font-display text-xl font-semibold text-content-primary transition-colors duration-300 hover:text-accent-light sm:text-2xl"
-                whileHover={shouldReduceMotion ? {} : { x: 4 }}
-                transition={{ duration: 0.2 }}
-              >
-                {personalInfo.email}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-accent-light transition-all duration-500 group-hover:w-full" />
-              </motion.a>
-            </div>
-
-            {/* Phone */}
-            <div>
-              <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-content-tertiary">
-                Phone
-              </p>
-              <a
-                href={`tel:${personalInfo.phone.replace(/\s/g, "")}`}
-                className="group relative inline-block font-display text-lg font-semibold text-content-primary transition-colors duration-300 hover:text-accent-light"
-              >
-                {personalInfo.phone}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-accent-light transition-all duration-500 group-hover:w-full" />
-              </a>
-            </div>
-
-            {/* Location */}
-            <div>
-              <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-content-tertiary">
-                Location
-              </p>
-              <p className="font-display text-lg font-semibold text-content-primary">
-                {personalInfo.location}
-              </p>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        {/* CTA button */}
-        <ScrollReveal delay={0.5}>
-          <div className="mt-12">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 font-display text-sm font-semibold text-white transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+          <div className="flex items-center gap-3 mb-6">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-subtle)]">
+              {t.contact.sectionNumber} /
+            </span>
+            <h2
+              id="contact-heading"
+              className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]"
             >
-              Get in Touch
-              <svg
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
+              {t.contact.sectionTitle}
+            </h2>
           </div>
         </ScrollReveal>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-16 items-start">
+          <div>
+            <ScrollReveal delay={0.1}>
+              <h3 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+                {t.contact.headline}{" "}
+                <span className="underline decoration-1 underline-offset-8">
+                  {t.contact.headlineHighlight}
+                </span>
+              </h3>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">
+                {t.contact.description}
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.3}>
+              <div className="mt-8">
+                <a
+                  href={`mailto:${t.contact.email}`}
+                  className="inline-flex items-center gap-3 rounded border border-[var(--text-primary)] bg-[var(--text-primary)] px-7 py-3.5 font-display text-sm font-semibold text-[var(--bg-color)] transition-opacity hover:opacity-90"
+                >
+                  <span>{t.contact.ctaButton}</span>
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Contact Details List */}
+          <ScrollReveal delay={0.25}>
+            <div className="rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] p-6 sm:p-8 space-y-6">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-subtle)] mb-1">
+                  {t.contact.emailLabel}
+                </p>
+                <a
+                  href={`mailto:${t.contact.email}`}
+                  className="font-display text-base sm:text-lg font-semibold text-[var(--text-primary)] hover:underline"
+                >
+                  {t.contact.email}
+                </a>
+              </div>
+
+              <div className="pt-4 border-t border-[var(--border-color)]">
+                <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-subtle)] mb-1">
+                  {t.contact.phoneLabel}
+                </p>
+                <a
+                  href={`tel:${t.contact.phone.replace(/\s/g, "")}`}
+                  className="font-display text-base sm:text-lg font-semibold text-[var(--text-primary)] hover:underline"
+                >
+                  {t.contact.phone}
+                </a>
+              </div>
+
+              <div className="pt-4 border-t border-[var(--border-color)]">
+                <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-subtle)] mb-1">
+                  {t.contact.locationLabel}
+                </p>
+                <p className="font-display text-base sm:text-lg font-semibold text-[var(--text-primary)]">
+                  {t.contact.location}
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

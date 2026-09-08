@@ -1,176 +1,216 @@
 "use client";
 
-import { personalInfo } from "@/data/content";
-import { useEffect, useState, useCallback } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-
-const navigation = [
-  ["About", "about"],
-  ["Experience", "experience"],
-  ["Skills", "skills"],
-  ["Education", "education"],
-  ["Contact", "contact"],
-] as const;
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Header() {
-  const [activeSection, setActiveSection] = useState("");
+  const { t, locale, toggleLocale } = useLanguage();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-
-  useMotionValueEvent(scrollYProgress, "change", () => {
-    // We just need this to trigger re-render for the progress bar
-  });
-
-  const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 50);
-  }, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          // Pick the one with the largest intersection ratio
-          const best = visible.reduce((a, b) =>
-            a.intersectionRatio > b.intersectionRatio ? a : b
-          );
-          setActiveSection(best.target.id);
-        }
-      },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5] }
-    );
-
-    navigation.forEach(([, id]) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
   }, []);
 
+  const navLinks = [
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.experience, href: "#experience" },
+    { label: t.nav.skills, href: "#skills" },
+    { label: t.nav.education, href: "#education" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
+
+  const toggleTheme = () => {
+    const current = resolvedTheme || theme;
+    setTheme(current === "dark" ? "light" : "dark");
+  };
+
   return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "border-b border-border bg-surface-primary/70 backdrop-blur-xl"
-            : "bg-transparent"
-        }`}
-      >
-        {/* Scroll progress bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-accent to-accent-light"
-          style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
-        />
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        isScrolled
+          ? "bg-[var(--bg-color)]/85 backdrop-blur-md border-b border-[var(--border-color)] py-3.5"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-6 flex items-center justify-between">
+        {/* Name / Logo */}
+        <Link
+          href="/"
+          className="group flex items-center gap-2.5 text-inherit transition-opacity hover:opacity-80"
+        >
+          <span className="flex h-7 w-7 items-center justify-center rounded border border-[var(--border-color)] bg-[var(--surface-color)] font-mono text-xs font-bold tracking-tight text-[var(--text-primary)]">
+            KA
+          </span>
+          <span className="font-display text-sm font-semibold tracking-tight text-[var(--text-primary)]">
+            Kadir Akdoğan
+          </span>
+        </Link>
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
-          {/* Logo / Name */}
-          <a
-            href="#hero"
-            className="group flex items-center gap-3 transition-opacity duration-300 hover:opacity-80"
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-surface-secondary font-display text-sm font-bold text-accent transition-colors duration-300 group-hover:border-accent/30">
-              KA
-            </div>
-            <div
-              className={`hidden transition-all duration-300 sm:block ${
-                isScrolled ? "opacity-100" : "opacity-0"
-              }`}
+        {/* Desktop Navigation */}
+        <nav
+          aria-label="Desktop navigation"
+          className="hidden md:flex items-center gap-6 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="transition-colors hover:text-[var(--text-primary)]"
             >
-              <p className="font-display text-sm font-semibold text-content-primary leading-tight">
-                {personalInfo.name}
-              </p>
-            </div>
-          </a>
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-          {/* Desktop Nav */}
-          <nav
-            aria-label="Primary navigation"
-            className="hidden items-center gap-1 md:flex"
+        {/* Action Controls: Language + Theme + View CV */}
+        <div className="hidden sm:flex items-center gap-3">
+          {/* Language Toggle */}
+          <button
+            type="button"
+            onClick={toggleLocale}
+            aria-label={`Switch language. Current: ${locale.toUpperCase()}`}
+            className="flex items-center gap-1 rounded border border-[var(--border-color)] bg-[var(--surface-color)] px-2.5 py-1.5 font-mono text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--text-muted)]"
           >
-            {navigation.map(([label, href]) => (
-              <a
-                key={href}
-                href={`#${href}`}
-                className={`relative rounded-full px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] transition-all duration-300 ${
-                  activeSection === href
-                    ? "text-accent-light"
-                    : "text-content-tertiary hover:text-content-secondary"
-                }`}
-              >
-                {activeSection === href && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 rounded-full bg-accent/10 border border-accent/20"
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 30,
-                    }}
+            <span className={locale === "tr" ? "font-bold text-[var(--text-primary)]" : "text-[var(--text-subtle)]"}>
+              TR
+            </span>
+            <span className="text-[var(--text-subtle)]">/</span>
+            <span className={locale === "en" ? "font-bold text-[var(--text-primary)]" : "text-[var(--text-subtle)]"}>
+              EN
+            </span>
+          </button>
+
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle dark and light theme"
+            className="flex h-8 w-8 items-center justify-center rounded border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)] transition-colors hover:border-[var(--text-muted)]"
+          >
+            {mounted ? (
+              resolvedTheme === "dark" ? (
+                // Sun Icon for Dark Mode
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                   />
-                )}
-                <span className="relative z-10">{label}</span>
+                </svg>
+              ) : (
+                // Moon Icon for Light Mode
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
+              )
+            ) : (
+              <span className="h-4 w-4 block" />
+            )}
+          </button>
+
+          {/* View CV Button */}
+          <Link
+            href="/cv"
+            className="rounded border border-[var(--text-primary)] bg-[var(--text-primary)] px-3.5 py-1.5 font-display text-xs font-semibold text-[var(--bg-color)] transition-opacity hover:opacity-90"
+          >
+            {t.nav.viewCv}
+          </Link>
+        </div>
+
+        {/* Mobile Hamburger Button */}
+        <div className="flex sm:hidden items-center gap-2">
+          {/* Quick Language Toggle on Mobile */}
+          <button
+            type="button"
+            onClick={toggleLocale}
+            className="rounded border border-[var(--border-color)] bg-[var(--surface-color)] px-2 py-1 font-mono text-xs font-semibold text-[var(--text-primary)]"
+          >
+            {locale.toUpperCase()}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            className="flex h-8 w-8 items-center justify-center rounded border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-primary)]"
+          >
+            {mobileMenuOpen ? (
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="sm:hidden border-b border-[var(--border-color)] bg-[var(--surface-color)] px-6 py-5 shadow-lg">
+          <nav className="flex flex-col gap-4 text-sm font-medium uppercase tracking-wider text-[var(--text-muted)]">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1 transition-colors hover:text-[var(--text-primary)]"
+              >
+                {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-content-secondary transition-colors duration-300 hover:border-border-hover hover:text-content-primary md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </motion.header>
-
-      {/* Mobile overlay */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 flex items-center justify-center bg-surface-primary/95 backdrop-blur-xl md:hidden"
-        >
-          <nav className="flex flex-col items-center gap-6">
-            {navigation.map(([label, href], i) => (
-              <motion.a
-                key={href}
-                href={`#${href}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, duration: 0.4 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`font-display text-2xl font-semibold transition-colors duration-300 ${
-                  activeSection === href
-                    ? "text-accent-light"
-                    : "text-content-secondary hover:text-content-primary"
-                }`}
+          <div className="mt-5 pt-4 border-t border-[var(--border-color)] flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)]"
               >
-                {label}
-              </motion.a>
-            ))}
-          </nav>
-        </motion.div>
+                {resolvedTheme === "dark" ? "Light Mode" : "Dark Mode"}
+              </button>
+            </div>
+
+            <Link
+              href="/cv"
+              onClick={() => setMobileMenuOpen(false)}
+              className="rounded border border-[var(--text-primary)] bg-[var(--text-primary)] px-3 py-1.5 font-display text-xs font-semibold text-[var(--bg-color)]"
+            >
+              {t.nav.viewCv}
+            </Link>
+          </div>
+        </div>
       )}
-    </>
+    </header>
   );
 }

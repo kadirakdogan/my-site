@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin", "latin-ext"],
@@ -21,22 +22,22 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kadir Akdoğan — IT Support Specialist & Network Administrator",
+  title: "Kadir Akdoğan — BT Destek Uzmanı / IT Specialist",
   description:
-    "Professional profile of Kadir Akdoğan: IT support, network & systems administration, infrastructure management, and cybersecurity.",
+    "Kadir Akdoğan — BT Destek Uzmanı, Ağ ve Sistem Yöneticisi profesyonel portfolyo ve özgeçmiş sayfası.",
   metadataBase: new URL("https://kadirakdogan.vercel.app"),
   openGraph: {
-    title: "Kadir Akdoğan — IT Support Specialist & Network Administrator",
+    title: "Kadir Akdoğan — IT Specialist & Network Administrator",
     description:
-      "IT support, network and systems administration, infrastructure management, and cybersecurity.",
+      "Professional profile of Kadir Akdoğan: technical support, network & systems administration, and IT infrastructure.",
     url: "https://kadirakdogan.vercel.app",
     siteName: "Kadir Akdoğan",
     images: [
       {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Kadir Akdoğan — IT Professional",
+        url: "/images/profile.jpg",
+        width: 800,
+        height: 800,
+        alt: "Kadir Akdoğan",
       },
     ],
     locale: "tr_TR",
@@ -50,10 +51,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
+      lang="tr"
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="font-body">{children}</body>
+      <body className="min-h-screen bg-[var(--bg-color)] text-[var(--text-primary)] font-body antialiased">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

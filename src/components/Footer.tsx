@@ -1,19 +1,24 @@
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
+
 export function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border py-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-center sm:flex-row sm:px-8 sm:text-left lg:px-12">
-        <p className="font-mono text-xs text-content-tertiary">
-          © {year} Kadir Akdoğan. All rights reserved.
+    <footer className="border-t border-[var(--border-color)] bg-[var(--surface-color)] py-8">
+      <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-subtle)] font-mono">
+        <p>
+          © {year} Kadir Akdoğan. {t.footer.rightsReserved}
         </p>
-        <p className="font-mono text-xs text-content-tertiary">
-          Built with{" "}
+        <p>
+          {t.footer.builtWith}{" "}
           <a
             href="https://nextjs.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-content-secondary transition-colors duration-300 hover:text-accent-light"
+            className="text-[var(--text-primary)] hover:underline"
           >
             Next.js
           </a>

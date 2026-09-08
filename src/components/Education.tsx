@@ -1,50 +1,49 @@
 "use client";
 
-import { education } from "@/data/content";
+import { useLanguage } from "@/context/LanguageContext";
 import { ScrollReveal } from "./ScrollReveal";
 
 export function Education() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="education"
-      className="relative py-24 sm:py-32"
       aria-labelledby="education-heading"
+      className="py-20 sm:py-28 border-b border-[var(--border-color)]"
     >
-      {/* Subtle top border */}
-      <div className="absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent sm:inset-x-8 lg:inset-x-12" />
-
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent-light">
-            04 / Education
-          </p>
-          <h2
-            id="education-heading"
-            className="font-display text-3xl font-bold tracking-tight text-content-primary sm:text-4xl"
-          >
-            Education
-          </h2>
+          <div className="flex items-center gap-3 mb-12">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-subtle)]">
+              {t.education.sectionNumber} /
+            </span>
+            <h2
+              id="education-heading"
+              className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]"
+            >
+              {t.education.sectionTitle}
+            </h2>
+          </div>
         </ScrollReveal>
 
-        <div className="mt-12 space-y-6">
-          {education.map((item, index) => (
+        <div className="space-y-6">
+          {t.education.items.map((item, index) => (
             <ScrollReveal key={item.institution} delay={index * 0.1}>
-              <div className="group relative rounded-xl border border-border bg-surface-secondary/30 p-6 transition-all duration-300 hover:border-border-hover hover:bg-surface-secondary/60 sm:p-8">
-                {/* Accent left bar */}
-                <div className="absolute bottom-6 left-0 top-6 w-[2px] rounded-full bg-accent/40 transition-colors duration-300 group-hover:bg-accent sm:bottom-8 sm:top-8" />
-
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-                  <div className="pl-4">
-                    <h3 className="font-display text-lg font-bold text-content-primary sm:text-xl">
+              <div className="rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] p-6 sm:p-8 transition-colors hover:border-[var(--text-muted)]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                  <div>
+                    <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)]">
                       {item.institution}
                     </h3>
-                    <p className="mt-1.5 text-sm text-content-secondary">
+                    <p className="mt-1 text-sm font-medium text-[var(--text-muted)]">
                       {item.field}
                     </p>
                   </div>
-                  <p className="shrink-0 pl-4 font-mono text-xs uppercase tracking-wider text-content-tertiary sm:pl-0">
+
+                  <span className="font-mono text-xs text-[var(--text-subtle)] uppercase tracking-wider">
                     {item.startDate} – {item.endDate}
-                  </p>
+                  </span>
                 </div>
               </div>
             </ScrollReveal>

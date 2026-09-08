@@ -1,68 +1,70 @@
 "use client";
 
-import { personalInfo } from "@/data/content";
+import { useLanguage } from "@/context/LanguageContext";
 import { ScrollReveal } from "./ScrollReveal";
 
-const stats = [
-  { value: "4+", label: "Companies" },
-  { value: "2+", label: "Years Experience" },
-  { value: "3", label: "Specializations" },
-];
-
-const specialties = ["Network & Infrastructure", "Security Systems", "Systems Administration"];
-
 export function About() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="about"
-      className="relative py-24 sm:py-32"
       aria-labelledby="about-heading"
+      className="py-20 sm:py-28 border-b border-[var(--border-color)]"
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal>
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent-light">
-            01 / About
-          </p>
-          <h2
-            id="about-heading"
-            className="font-display text-3xl font-bold tracking-tight text-content-primary sm:text-4xl"
-          >
-            Professional Summary
-          </h2>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-subtle)]">
+              {t.about.sectionNumber} /
+            </span>
+            <h2
+              id="about-heading"
+              className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]"
+            >
+              {t.about.sectionTitle}
+            </h2>
+          </div>
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-16 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
-          {/* Left — summary text */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-start">
+          {/* Left: Summary Text and Core Focus Tags */}
           <ScrollReveal delay={0.1}>
-            <p className="text-lg leading-[1.8] text-content-secondary">
-              {personalInfo.summary}
+            <p className="font-body text-base sm:text-lg leading-relaxed text-[var(--text-primary)]">
+              {t.about.summary}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {specialties.map((s) => (
-                <span
-                  key={s}
-                  className="rounded-full border border-border px-4 py-1.5 font-mono text-xs text-content-tertiary transition-colors duration-300 hover:border-border-hover hover:text-content-secondary"
-                >
-                  {s}
-                </span>
-              ))}
+
+            <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
+              <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-subtle)] mb-3">
+                {t.about.sectionTitle === "Hakkımda" ? "Odak Alanları" : "Focus Areas"}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {t.about.coreAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="rounded border border-[var(--border-color)] bg-[var(--surface-color)] px-3 py-1 font-mono text-xs text-[var(--text-muted)]"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
 
-          {/* Right — stats */}
-          <ScrollReveal delay={0.25}>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-1 lg:gap-8">
-              {stats.map((stat, i) => (
+          {/* Right: Key Highlights / Stats */}
+          <ScrollReveal delay={0.2}>
+            <div className="flex flex-col gap-6 rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] p-6 sm:p-8">
+              {t.about.stats.map((stat, idx) => (
                 <div
                   key={stat.label}
-                  className={`group border-l-2 border-border pl-6 transition-colors duration-300 hover:border-accent ${
-                    i < stats.length - 1 ? "lg:pb-2" : ""
+                  className={`${
+                    idx !== 0 ? "pt-6 border-t border-[var(--border-color)]" : ""
                   }`}
                 >
-                  <p className="font-display text-4xl font-bold text-content-primary transition-colors duration-300 group-hover:text-accent-light lg:text-5xl">
+                  <p className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
                     {stat.value}
                   </p>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.15em] text-content-tertiary">
+                  <p className="mt-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)]">
                     {stat.label}
                   </p>
                 </div>
