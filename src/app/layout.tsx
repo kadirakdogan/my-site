@@ -70,7 +70,7 @@ export default function RootLayout({
     name: "Kadir Akdoğan",
     jobTitle: "IT Support Specialist / Network & Systems Administrator",
     url: "https://kadirakdogan.vercel.app",
-    email: "akdogankadir07@gmail.com",
+    email: "akdogankadir07@icloud.com",
     telephone: "+905525326270",
     address: {
       "@type": "PostalAddress",
