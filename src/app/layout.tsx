@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+// @ts-expect-error CSS imports are handled by Next.js
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
         url: "/images/profile.jpg",
         width: 800,
         height: 800,
-        alt: "Kadir Akdoğan",
+        alt: "Kadir AKDOĞAN",
       },
     ],
     locale: "tr_TR",
@@ -51,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kadir Akdoğan — IT Specialist & Network Administrator",
-    description: "Professional profile of Kadir Akdoğan: technical support, network & systems administration.",
+    title: "Kadir AKDOĞAN — IT Specialist & Network Administrator",
+    description: "Professional profile of Kadir AKDOĞAN : technical support, network & systems administration.",
     images: ["/images/profile.jpg"],
   },
   icons: {
@@ -67,7 +68,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Kadir Akdoğan",
+    name: "Kadir AKDOĞAN",
     jobTitle: "IT Support Specialist / Network & Systems Administrator",
     url: "https://kadirakdogan.vercel.app",
     email: "akdogankadir07@icloud.com",
