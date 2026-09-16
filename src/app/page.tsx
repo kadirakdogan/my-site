@@ -83,7 +83,7 @@ export default function HomePage() {
                     width={450}
                     height={450}
                     priority
-                    className="h-full w-full object-cover object-center grayscale contrast-[1.05]"
+                    className="h-full w-full object-cover object-center"
                   />
                 </div>
               </ScrollReveal>
