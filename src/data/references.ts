@@ -23,6 +23,6 @@ export const professionalReferences: ReferenceItem[] = [
     company: "Kent Bilgisayar",
     role: "Firma Sahibi / Teknik Yönetici",
     phone: "+90 (533) 818 95 76",
-    email: "destek@kentbilgisayar.com",
+    email: "eyup07@gmail.com",
   },
 ];
