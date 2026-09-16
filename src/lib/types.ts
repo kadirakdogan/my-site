@@ -140,6 +140,5 @@ export interface SiteContent {
     quickLinks: string;
     contactHeading: string;
     rightsReserved: string;
-    builtWith: string;
   };
 }

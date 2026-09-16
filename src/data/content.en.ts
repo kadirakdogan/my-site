@@ -231,6 +231,5 @@ export const contentEn: SiteContent = {
     quickLinks: "Navigation",
     contactHeading: "Direct Contact",
     rightsReserved: "All rights reserved.",
-    builtWith: "Engineered with Next.js & TypeScript",
   },
 };

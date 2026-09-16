@@ -56,7 +56,7 @@ export function Header() {
             KA
           </span>
           <span className="font-display text-sm font-semibold tracking-tight text-[var(--text-primary)]">
-            Kadir Akdoğan
+            Kadir AKDOĞAN
           </span>
         </Link>
 

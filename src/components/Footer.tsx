@@ -18,7 +18,7 @@ export function Footer() {
                 KA
               </span>
               <span className="font-display text-base font-bold tracking-tight text-[var(--text-primary)]">
-                Kadir Akdoğan
+                Kadir AKDOĞAN
               </span>
             </div>
             <p className="max-w-md font-body text-sm leading-relaxed text-[var(--text-muted)]">
@@ -76,8 +76,8 @@ export function Footer() {
             </p>
             <ul className="flex flex-col gap-2 text-sm text-[var(--text-muted)] font-mono">
               <li>
-                <a href="mailto:akdogankadir07@gmail.com" className="transition-colors hover:text-[var(--text-primary)] break-all">
-                  akdogankadir07@gmail.com
+                <a href="mailto:akdogankadir07@icloud.com" className="transition-colors hover:text-[var(--text-primary)] break-all">
+                  akdogankadir07@icloud.com
                 </a>
               </li>
               <li>
@@ -95,7 +95,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[var(--text-subtle)]">
           <p>© {currentYear} Kadir Akdoğan. {t.footer.rightsReserved}</p>
-          <p>{t.footer.builtWith}</p>
+          
         </div>
       </div>
     </footer>

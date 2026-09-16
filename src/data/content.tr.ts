@@ -215,7 +215,7 @@ export const contentTr: SiteContent = {
       directPhone: "0 (552) 532 62 70",
       location: "Kepez / Antalya, Türkiye",
       workingHours: "Çalışma Saatleri",
-      workingHoursVal: "Pazartesi – Cumartesi (08:30 – 19:00)",
+      workingHoursVal: "Pazartesi – Cumartesi (09.00 – 18:00)",
     },
   },
   cvPage: {
@@ -231,6 +231,5 @@ export const contentTr: SiteContent = {
     quickLinks: "Hızlı Bağlantılar",
     contactHeading: "Doğrudan İletişim",
     rightsReserved: "Tüm hakları saklıdır.",
-    builtWith: "Next.js & TypeScript ile geliştirildi",
   },
 };
