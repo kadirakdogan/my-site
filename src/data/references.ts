@@ -7,7 +7,7 @@ export const professionalReferences: ReferenceItem[] = [
     company: "Paçacı Şemsi",
     role: "İşletme Sahibi",
     phone: "+90 (544) 208 00 75",
-    email: "iletisim@pacacisemsi.com",
+    email: "info@pacacisemsi.com",
   },
   {
     id: "canan-baser",
