@@ -211,7 +211,7 @@ export const contentEn: SiteContent = {
       errorMessage: "An error occurred while sending your message. Please reach out via direct email or phone.",
     },
     info: {
-      directEmail: "akdogankadir07@gmail.com",
+      directEmail: "akdogankadir07@icloud.com",
       directPhone: "0 (552) 532 62 70",
       location: "Kepez / Antalya, Türkiye",
       workingHours: "Working Hours",

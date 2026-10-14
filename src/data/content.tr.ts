@@ -211,7 +211,7 @@ export const contentTr: SiteContent = {
       errorMessage: "Mesaj gönderilirken bir hata oluştu. Lütfen doğrudan e-posta veya telefon ile ulaşın.",
     },
     info: {
-      directEmail: "akdogankadir07@gmail.com",
+      directEmail: "akdogankadir07@icloud.com",
       directPhone: "0 (552) 532 62 70",
       location: "Kepez / Antalya, Türkiye",
       workingHours: "Çalışma Saatleri",

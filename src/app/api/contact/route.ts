@@ -9,7 +9,7 @@ import { Resend } from "resend";
  * or in .env.local for local testing:
  * RESEND_API_KEY=re_xxxxxxxxxxxx
  *
- * Recipient Email: akdogankadir07@gmail.com
+ * Recipient Email: akdogankadir07@icloud.com
  */
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     if (resend) {
       const { data, error } = await resend.emails.send({
         from: "Kadir Akdoğan Portfolio <onboarding@resend.dev>",
-        to: ["akdogankadir07@gmail.com"],
+        to: ["akdogankadir07@icloud.com"],
         replyTo: email,
         subject: `[Portfolio Inquiry] ${subject || "New Contact Message"} - ${name}`,
         text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject || "N/A"}\n\nMessage:\n${message}`,

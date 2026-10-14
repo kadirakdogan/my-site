@@ -129,7 +129,7 @@ Tarayıcı içinde çalışan gömülü PDF okuyucu (`<object>` ve iframe fallba
 - **Ad Soyad**: Kadir Akdoğan
 - **Unvan**: BT Destek Uzmanı / Ağ ve Sistem Yöneticisi
 - **Konum**: Kepez / Antalya, Türkiye
-- **E-Posta**: [akdogankadir07@gmail.com](mailto:akdogankadir07@gmail.com)
+- **E-Posta**: [akdogankadir07@icloud.com](mailto:akdogankadir07@icloud.com)
 - **Web Sitesi**: [kadirakdogan.vercel.app](https://kadirakdogan.vercel.app)
 - **GitHub**: [@kadirakdogan](https://github.com/kadirakdogan)
 
