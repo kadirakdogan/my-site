@@ -27,18 +27,18 @@
   <img src="https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel&logoColor=white" alt="Vercel" />
   <img src="https://img.shields.io/badge/Tema-Dark%20%2F%20Light-f59e0b?style=flat-square" alt="Dark/Light Mode" />
   <img src="https://img.shields.io/badge/Dil-TR%20%7C%20EN-6366f1?style=flat-square" alt="Bilingual" />
-  <img src="https://img.shields.io/badge/Lisans-MIT-success?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/badge/Telif%20Hakk%C4%B1-T%C3%BCm%20Haklar%C4%B1%20Sakl%C4%B1d%C4%B1r-e11d48?style=flat-square" alt="All Rights Reserved" />
 </p>
 
 ---
 
 ## 📌 Genel Bakış / Overview
 
-Bu depo, **Kadir Akdoğan** (BT Destek Uzmanı / Ağ ve Sistem Yöneticisi) için özel olarak tasarlanmış kurumsal düzeydeki kişisel portfolyo, özgeçmiş ve interaktif CV platformunun kaynak kodlarını içerir.
+Bu vitrin, **Kadir Akdoğan** (BT Destek Uzmanı / Ağ ve Sistem Yöneticisi) için özel olarak geliştirilmiş kurumsal kişisel web sitesi, kariyer geçmişi ve etkileşimli CV platformunu tanıtır.
 
-Tasarım felsefesi; Apple ve Microsoft ekosistemlerinin benimsediği **monokrom tipografik hiyerarşi**, **mikro-etkileşimler**, **yüksek kontrastlı karanlık/aydınlık mod** ve **performans odaklı App Router mimarisi** üzerine inşa edilmiştir.
+Tasarım felsefesi; Apple ve Microsoft ekosistemlerinin benimsediği **katı monokrom tipografik hiyerarşi**, **mikro-etkileşimler**, **yüksek kontrastlı karanlık/aydınlık mod** ve **performans odaklı App Router mimarisi** üzerine kuruludur.
 
-> 🌐 **Canlı Demo**: [https://kadirakdogan.vercel.app](https://kadirakdogan.vercel.app)
+> 🌐 **Canlı Web Sitesi**: [https://kadirakdogan.vercel.app](https://kadirakdogan.vercel.app)
 
 ---
 
@@ -95,8 +95,8 @@ Tarayıcı içinde çalışan gömülü PDF okuyucu (`<object>` ve iframe fallba
 - **🌓 Kusursuz Tema Sistemi (next-themes)**: Yanıp sönme (FOUC) yapmayan, CSS custom variables tabanlı Dark ve Light mod geçişi.
 - **🎨 Framer Motion Animasyonları**: Zarif scroll animasyonları, donanım ivmeli fade-in geçişleri ve `prefers-reduced-motion` erişilebilirlik desteği.
 - **✉️ Sunucusuz İletişim Altyapısı (Next.js Serverless Route)**: `/api/contact` üzerinden Resend e-posta servisine doğrudan bağlantı, form doğrulama ve spam avcısı (honeypot field) koruması.
-- **🔒 Kurumsal Güvenlik Başlıkları (CSP & HSTS)**: `next.config.mjs` içerisinde yapılandırılmış Content Security Policy, X-Frame-Options (`SAMEORIGIN`), X-Content-Type-Options (`nosniff`).
-- **🔍 Arama Motoru Optimizasyonu (SEO & OpenGraph)**: JSON-LD `Person` şeması, otomatik `sitemap.xml`, `robots.txt` ve sosyal medya için OG Image kartları.
+- **🔒 Kurumsal Güvenlik Başlıkları (CSP & HSTS)**: Content Security Policy, X-Frame-Options (`SAMEORIGIN`), X-Content-Type-Options (`nosniff`).
+- **🔍 Arama Motoru Optimizasyonu (SEO & OpenGraph)**: JSON-LD `Person` şeması, dinamik `sitemap.xml`, `robots.txt` ve sosyal medya için OG Image kartları.
 - **🖨️ Yazdırma Dostu (Print-Ready)**: Doğrudan `Cmd+P` veya `Ctrl+P` yapıldığında gezinme çubuklarını gizleyen ve salt okunur A4 formatı sunan `@media print` stilleri.
 
 ---
@@ -111,133 +111,16 @@ Tarayıcı içinde çalışan gömülü PDF okuyucu (`<object>` ve iframe fallba
 | **Animasyon** | Framer Motion | Mikro-etkileşimler ve scroll görünürlük efektleri |
 | **Tema** | next-themes | SSR uyumlu tema yönetimi |
 | **E-Posta** | Resend API | İletişim formu için sunucusuz e-posta gönderimi |
-| **Ekran Yakalama** | Puppeteer-Core | Yüksek çözünürlüklü otomatik ekran görüntüsü üretimi |
 | **Dağıtım** | Vercel | Küresel kenar ağında (Edge CDN) sıfır yapılandırmalı yayınlama |
 
 ---
 
-## 📁 Proje Dizin Yapısı / Directory Tree
+## 🔒 Telif Hakkı ve Mülkiyet / Copyright & Ownership
 
-```text
-kadir-akdogan-portfolio/
-├── assets/                       # GitHub depolama görselleri ve banner'lar
-│   ├── banner.svg                # Vektörel dinamik README başlık görseli
-│   └── screenshots/              # Retina çözünürlükte ekran alıntıları
-│       ├── preview-home-dark.png
-│       ├── preview-home-light.png
-│       ├── preview-experience.png
-│       ├── preview-skills.png
-│       ├── preview-certifications.png
-│       ├── preview-cv.png
-│       ├── preview-contact.png
-│       └── preview-mobile.png
-├── public/                       # Statik web varlıkları (CDN tarafından sunulan)
-│   ├── cv/
-│   │   └── kadir-akdogan-cv.pdf  # Güncel profesyonel özgeçmiş PDF belgesi
-│   ├── images/
-│   │   └── profile.jpg           # Yüksek çözünürlüklü profil fotoğrafı
-│   ├── screenshots/              # Genel web erişimli ekran görüntüleri
-│   ├── favicon.svg
-│   └── og-image.svg
-├── scripts/
-│   └── capture-screenshots.mjs   # Otomatik ekran görüntüsü alma scripti (Puppeteer)
-├── src/
-│   ├── app/                      # Next.js App Router Sayfaları ve Endpoint'ler
-│   │   ├── api/contact/route.ts  # Resend destekli güvenli iletişim API'si
-│   │   ├── certifications/       # Sertifikalar ve eğitim sayfası
-│   │   ├── contact/              # İletişim sayfası
-│   │   ├── cv/                   # İnteraktif PDF CV önizleme & indirme sayfası
-│   │   ├── experience/           # İş deneyimi ve kariyer sayfası
-│   │   ├── references/           # Maskeleme korumalı referanslar sayfası
-│   │   ├── skills/               # Teknik yetenekler matrisi sayfası
-│   │   ├── globals.css           # Monokrom CSS değişkenleri ve baskı stilleri
-│   │   ├── layout.tsx            # Root layout, Header, Footer & JSON-LD şeması
-│   │   ├── not-found.tsx         # Özel 404 sayfası
-│   │   ├── robots.ts             # Robots.txt üreticisi
-│   │   └── sitemap.ts            # XML Sitemap üreticisi
-│   ├── components/               # Yeniden kullanılabilir React bileşenleri
-│   │   ├── ui/                   # Badge, Button, Card, SectionHeading
-│   │   ├── Header.tsx            # Yapışkan (Sticky) navigasyon ve geçiş anahtarları
-│   │   ├── Footer.tsx            # Kurumsal alt bilgi
-│   │   └── ScrollReveal.tsx      # Framer Motion kaydırma kapsayıcısı
-│   ├── context/
-│   │   └── LanguageContext.tsx   # İki dilli (TR/EN) durum yöneticisi
-│   ├── data/                     # İçerik ve veri modelleri
-│   │   ├── content.tr.ts         # Türkçe ana metinler
-│   │   ├── content.en.ts         # İngilizce tercümeler
-│   │   ├── certifications.ts     # Sertifika kayıtları
-│   │   └── references.ts         # Referans kayıtları
-│   └── lib/
-│       └── types.ts              # TypeScript arayüz tanımları
-├── next.config.mjs               # CSP güvenlik başlıkları ve Next yapılandırması
-├── tailwind.config.ts            # Özel font ve monokrom renk token'ları
-└── package.json
-```
-
----
-
-## 🚀 Hızlı Başlangıç / Getting Started
-
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
-
-### 1. Depoyu Klonlayın
-```bash
-git clone https://github.com/kadirakdogan/my-site.git
-cd my-site
-```
-
-### 2. Bağımlılıkları Yükleyin
-```bash
-npm install
-```
-
-### 3. Çevre Değişkenlerini Tanımlayın (Opsiyonel)
-İletişim formundan e-posta almak istiyorsanız kök dizinde `.env.local` dosyası oluşturun:
-```env
-RESEND_API_KEY=re_ornek_resend_anahtariniz
-```
-*(Not: `RESEND_API_KEY` girilmediğinde form geliştirici modunda çalışır ve gönderilen mesajları güvenle sunucu konsoluna kaydeder).*
-
-### 4. Geliştirme Sunucusunu Başlatın
-```bash
-npm run dev
-```
-Tarayıcınızdan [http://localhost:3000](http://localhost:3000) adresine giderek siteyi görüntüleyin.
-
-### 5. Yeni Ekran Görüntüleri Oluşturma
-Sitede tasarım veya içerik güncellemesi yaptığınızda, README ekran görüntülerini tek komutla otomatik yenileyebilirsiniz:
-```bash
-npm run screenshots
-```
-
----
-
-## 📝 İçerik Güncelleme Kılavuzu / Content Customization
-
-| Yapılacak İşlem | İlgili Dosya Yolu | Açıklama |
-| :--- | :--- | :--- |
-| **Yeni İş Deneyimi Ekleme** | `src/data/content.tr.ts`<br />`src/data/content.en.ts` | `experiencePage.items` dizisine yeni pozisyon objesi ekleyin. |
-| **Teknik Yetenek Güncelleme** | `src/data/content.tr.ts`<br />`src/data/content.en.ts` | `skillsPage.categories` altında yetenek etiketlerini düzenleyin. |
-| **Sertifika Ekleme** | `src/data/certifications.ts` | `certifications` dizisine yeni sertifika veya eğitim kaydı ekleyin. |
-| **Referans Ekleme** | `src/data/references.ts` | `references` dizisine isim, kurum, unvan ve telefon bilgisi ekleyin. |
-| **CV PDF Belgesini Güncelleme** | `public/cv/kadir-akdogan-cv.pdf` | Yeni PDF dosyanızı bu konuma aynı isimle kaydedin. |
-| **Profil Fotoğrafını Değiştirme** | `public/images/profile.jpg` | Yeni portre fotoğrafınızı bu konuma yerleştirin. |
-
----
-
-## 🌐 Canlı Yayınlama / Deployment (Vercel)
-
-Web sitesi Vercel üzerinde tek tıkla canlıya alınacak biçimde yapılandırılmıştır:
-
-1. Değişikliklerinizi GitHub'a gönderin:
-   ```bash
-   git add .
-   git commit -m "feat: update portfolio content and showcase"
-   git push origin main
-   ```
-2. [Vercel Dashboard](https://vercel.com/new) üzerinden `kadirakdogan/my-site` deposunu bağlayın.
-3. Framework Preset otomatik olarak **Next.js** olarak algılanır.
-4. **Deploy** butonuna tıklayın. Her `main` dalı güncellemesinde siteniz otomatik olarak derlenip güncellenecektir.
+> [!IMPORTANT]
+> Bu projenin tasarım mimarisi, kaynak kodları ve tüm içerik hakları **Kadir Akdoğan**'a aittir.  
+> Kaynak kodların izinsiz olarak kopyalanması, dağıtılması, yeniden yayınlanması veya ticari amaçlarla kullanılması yasaktır.  
+> &copy; 2026 Kadir Akdoğan. Tüm Hakları Saklıdır.
 
 ---
 
